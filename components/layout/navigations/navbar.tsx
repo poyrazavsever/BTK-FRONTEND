@@ -14,6 +14,8 @@ const menuItemsTop = [
   { label: "Blog", href: "/blog" },
   { label: "SSS", href: "/faq" },
   { label: "Topluluk", href: "/community" },
+  { label: "Giriş Yap", href: "/login" },
+  { label: "Kayıt Ol", href: "/register" },
 ];
 
 const menuItemsBottom = [
@@ -36,30 +38,43 @@ const Navbar: React.FC<NavbarProps> = ({ isLogin = false }) => {
       <div className="hidden md:flex items-center gap-2">
         <Logo variant="withText" />
         <div className="hidden md:flex gap-2 ml-6">
-          {menuLinks.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-text group font-nunito text-base px-2 py-1 hover:text-primary cursor-pointer transition flex items-center"
-            >
-              {item.label}
-              {isLogin && item.label === "Topluluk" && (
-                <Icon
-                  icon="hugeicons:arrow-down-01"
-                  width={18}
-                  height={18}
-                  className="ml-1 align-middle text-text/50 group-hover:text-primary"
-                />
-              )}
-            </a>
-          ))}
+          {menuLinks.map((item) => {
+            if (
+              !isLogin &&
+              (item.label === "Giriş Yap" || item.label === "Kayıt Ol")
+            ) {
+              // Masaüstünde login/register buton olarak gösterilecek, link olarak değil
+              return null;
+            }
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-text group font-nunito text-base px-2 py-1 hover:text-primary cursor-pointer transition flex items-center"
+              >
+                {item.label}
+                {isLogin && item.label === "Topluluk" && (
+                  <Icon
+                    icon="hugeicons:arrow-down-01"
+                    width={18}
+                    height={18}
+                    className="ml-1 align-middle text-text/50 group-hover:text-primary"
+                  />
+                )}
+              </a>
+            );
+          })}
         </div>
       </div>
       <div className="hidden md:flex items-center gap-2">
         {!isLogin ? (
           <>
-            <Button variant="secondary">Giriş Yap</Button>
-            <Button variant="primary">Hemen Başla</Button>
+            <a href="/login">
+              <Button variant="secondary">Giriş Yap</Button>
+            </a>
+            <a href="/register">
+              <Button variant="primary">Kayıt Ol</Button>
+            </a>
           </>
         ) : (
           <div className="flex items-center gap-4">
@@ -115,7 +130,12 @@ const Navbar: React.FC<NavbarProps> = ({ isLogin = false }) => {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-text font-nunito text-base py-2 px-2 hover:text-primary cursor-pointer transition flex items-center"
+                className={`text-text font-nunito text-base py-2 px-2 hover:text-primary cursor-pointer transition flex items-center ${
+                  !isLogin &&
+                  (item.label === "Giriş Yap" || item.label === "Kayıt Ol")
+                    ? "font-semibold"
+                    : ""
+                }`}
               >
                 {item.label}
                 {isLogin && item.label === "Topluluk" && (
