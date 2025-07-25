@@ -1,40 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+Proje Özeti:
 
-## Getting Started
+Bora Özkent adında bir yatırımcı var. Canlı yayınlarını ve videolarını severek takip ediyorum. Bir gün bir yayınında İstanbul’dan Çanakkale’ye taşındığını ve bu süreçte ciddi nakliye sorunları yaşadığını anlattı. Bu alanda büyük bir eksiklik olduğunu, özellikle eşyaların sadece taşınmakla kalmayıp yeni eve düzenli bir şekilde yerleştirilmesi gibi hizmetlerin de sunulabileceği bir platforma ihtiyaç duyulduğunu dile getirdi. “Keşke böyle bir platform olsa” dediği an, bizde bir fikir oluştu.
 
-First, run the development server:
+Bu konuşmadan ve gözlemlerimizden ilham alarak, e-ticaret ve yazılım tabanlı bir hackathon projesi geliştirmeye karar verdik. Projemizin temel amacı şu:
+Proje Fikri:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Kullanıcıların çeşitli sektörlerde veya gündelik yaşamda karşılaştıkları problemleri yazılımsal çözüm fikirleri olarak siteye yükleyebilecekleri bir platform oluşturuyoruz. Bu fikirler platform tarafından analiz edilir, lisanslanır ve geliştiricilere sunulur.
+Platformun İşleyişi:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    Fikir Gönderimi: Kullanıcılar karşılaştıkları problemlerden yola çıkarak çözüm fikirlerini yazar.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+    Lisanslama: Platform, bu fikirleri analiz eder ve uygun olanları dijital olarak lisanslar.
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+    Fikrin Yayınlanması: Lisanslanan fikirler, yazılımcıların erişimine açılır.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+    Projeye Katılım: Geliştiriciler, ilgi alanlarına ve beceri düzeylerine göre bu projelere katılabilir.
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    Hisse Dağılımı: Proje tamamlandığında, fikir sahibi ve projeyi geliştiren kişiler belirli oranlarda hisse sahibi olurlar.
 
-## Learn More
+    Proje Vitrini: Tamamlanan projeler platformun “Bitirilen Projeler” bölümünde sergilenir.
 
-To learn more about Next.js, take a look at the following resources:
+Ek Özellikler:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+    Yatırımcı Erişimi: Tamamlanan projeler yatırımcılara ve şirketlere sunulur. Yatırımcılar bu projelere yatırım yapabilir, projeleri satın alabilir veya hisse alabilir.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    Gemini AI Entegrasyonu:
 
-## Deploy on Vercel
+        Kullanıcıların girdiği fikirleri analiz eder.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+        Geliştirmek için gereken teknoloji, yazılım dili ve beceri seviyesini belirler.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+        Yazılımcıların CV, GitHub ve LinkedIn profillerini analiz ederek onlara uygun projeleri önerir.
+
+Projenin Amacı:
+
+    Gerçek hayattaki problemleri çözmek.
+
+    Geliştiricilere iş ve gelir fırsatı sunmak.
+
+    Fikir sahiplerinin projelerinden kazanç elde etmesini sağlamak.
+
+    Yatırımcılarla geliştiricileri bir araya getirerek sürdürülebilir ürünlerin ortaya çıkmasına öncülük etmek.
