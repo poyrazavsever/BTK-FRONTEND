@@ -1,6 +1,7 @@
-import Companies from "@/components/home/companies";
 import HeroSection from "@/components/home/heroSection";
+import Companies from "@/components/home/companies";
 import Stepper from "@/components/home/stepper";
+import Why from "@/components/home/why";
 
 export default function Home() {
   return (
@@ -10,6 +11,8 @@ export default function Home() {
       <Companies />
 
       <Stepper />
+
+      <Why />
     </div>
   );
 }
