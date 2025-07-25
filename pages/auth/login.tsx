@@ -123,7 +123,7 @@ const Login: AuthPageComponent = () => {
           <div className="mt-6 text-center text-sm text-text">
             Daha hesap oluşturmadın mı?{" "}
             <a
-              href="/register"
+              href="/auth/register"
               className="text-primary font-medium hover:underline"
             >
               Hesap Oluştur.

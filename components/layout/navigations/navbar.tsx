@@ -69,10 +69,10 @@ const Navbar: React.FC<NavbarProps> = ({ isLogin = false }) => {
       <div className="hidden md:flex items-center gap-2">
         {!isLogin ? (
           <>
-            <a href="/login">
+            <a href="/auth/login">
               <Button variant="secondary">Giriş Yap</Button>
             </a>
-            <a href="/register">
+            <a href="/auth/register">
               <Button variant="primary">Kayıt Ol</Button>
             </a>
           </>
