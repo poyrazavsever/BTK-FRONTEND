@@ -1,8 +1,32 @@
 import React from "react";
-
 import Logo from "@/components/ui/logo";
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
+import * as Yup from "yup";
 
-const Login = () => {
+interface LoginFormValues {
+  email: string;
+  password: string;
+}
+
+const initialValues: LoginFormValues = {
+  email: "",
+  password: "",
+};
+
+const validationSchema = Yup.object({
+  email: Yup.string()
+    .email("Geçerli bir e-posta girin")
+    .required("E-posta zorunlu"),
+  password: Yup.string()
+    .min(8, "En az 8 karakter olmalı")
+    .required("Şifre zorunlu"),
+});
+
+interface AuthPageComponent extends React.FC {
+  isAuthPage?: boolean;
+}
+
+const Login: AuthPageComponent = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-white">
       {/* Sol: Form alanı */}
@@ -14,42 +38,88 @@ const Login = () => {
           <p className="text-text text-base mb-6 text-center md:text-left">
             Bugün yeni bir gün, fikirleri görmek için heyecanlı mısın?
           </p>
-          <form className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-text mb-1">
-                E-Posta
-              </label>
-              <input
-                type="email"
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30 text-base"
-                placeholder="example@email.com"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-text mb-1">
-                Şifre
-              </label>
-              <input
-                type="password"
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30 text-base"
-                placeholder="En az 8 karakter"
-              />
-            </div>
-            <div className="flex justify-end">
-              <a
-                href="#"
-                className="text-primary text-sm font-medium hover:underline"
-              >
-                Şifremi Unuttum
-              </a>
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-primary text-white font-semibold rounded-lg py-2 mt-2 transition hover:bg-primary/90"
-            >
-              Giriş Yap
-            </button>
-          </form>
+          <Formik<LoginFormValues, { status?: string }>
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={async (
+              values,
+              {
+                setSubmitting,
+                setStatus,
+              }: FormikHelpers<LoginFormValues> & {
+                setStatus: (status?: string) => void;
+              }
+            ) => {
+              setStatus(undefined);
+              try {
+                // API isteği burada yapılacak
+                // örn: await api.login(values)
+                // Başarılı girişte yönlendirme veya state güncellemesi
+                // window.location.href = "/";
+              } catch (err: any) {
+                setStatus(err?.message || "Bir hata oluştu");
+              } finally {
+                setSubmitting(false);
+              }
+            }}
+          >
+            {({ isSubmitting, status }) => (
+              <Form className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-text mb-1">
+                    E-Posta
+                  </label>
+                  <Field
+                    name="email"
+                    type="email"
+                    placeholder="example@email.com"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30 text-base"
+                  />
+                  <ErrorMessage name="email">
+                    {(msg) => (
+                      <div className="text-xs text-red-500 mt-1">{msg}</div>
+                    )}
+                  </ErrorMessage>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-text mb-1">
+                    Şifre
+                  </label>
+                  <Field
+                    name="password"
+                    type="password"
+                    placeholder="En az 8 karakter"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30 text-base"
+                  />
+                  <ErrorMessage name="password">
+                    {(msg) => (
+                      <div className="text-xs text-red-500 mt-1">{msg}</div>
+                    )}
+                  </ErrorMessage>
+                </div>
+                <div className="flex justify-end">
+                  <a
+                    href="#"
+                    className="text-primary text-sm font-medium hover:underline"
+                  >
+                    Şifremi Unuttum
+                  </a>
+                </div>
+                {status && (
+                  <div className="text-xs text-red-500 text-center">
+                    {status}
+                  </div>
+                )}
+                <button
+                  type="submit"
+                  className="w-full bg-primary text-white font-semibold rounded-lg py-2 mt-2 transition hover:bg-primary/90 disabled:opacity-60"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Giriş Yapılıyor..." : "Giriş Yap"}
+                </button>
+              </Form>
+            )}
+          </Formik>
           <div className="mt-6 text-center text-sm text-text">
             Daha hesap oluşturmadın mı?{" "}
             <a

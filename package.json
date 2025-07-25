@@ -10,10 +10,13 @@
   },
   "dependencies": {
     "@iconify/react": "^6.0.0",
+    "@types/yup": "^0.32.0",
+    "formik": "^2.4.6",
     "framer-motion": "^12.23.9",
     "next": "15.4.4",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
