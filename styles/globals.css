@@ -25,3 +25,7 @@
     --shadow-active: rgba(0, 0, 0, 0.25);
 
 }
+
+body {
+    @apply bg-background text-text font-poppins
+}
