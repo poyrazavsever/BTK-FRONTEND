@@ -1,5 +1,6 @@
 import Companies from "@/components/home/companies";
 import HeroSection from "@/components/home/heroSection";
+import Stepper from "@/components/home/stepper";
 
 export default function Home() {
   return (
@@ -7,6 +8,8 @@ export default function Home() {
       <HeroSection />
 
       <Companies />
+
+      <Stepper />
     </div>
   );
 }
