@@ -8,27 +8,27 @@ type NavbarProps = {
 };
 
 const menuItemsTop = [
-  "Ana Sayfa",
-  "Platform",
-  "Hakkımızda",
-  "Blog",
-  "SSS",
-  "Topluluk",
+  { label: "Ana Sayfa", href: "/" },
+  { label: "Platform", href: "/platform" },
+  { label: "Hakkımızda", href: "/about" },
+  { label: "Blog", href: "/blog" },
+  { label: "SSS", href: "/faq" },
+  { label: "Topluluk", href: "/community" },
 ];
 
 const menuItemsBottom = [
-  "Nasıl Çalışır",
-  "Keşfet",
-  "Fikirler",
-  "Projeler",
-  "Yatırımcılar",
-  "Geliştiriciler",
+  { label: "Nasıl Çalışır", href: "/how-it-works" },
+  { label: "Keşfet", href: "/explore" },
+  { label: "Fikirler", href: "/ideas" },
+  { label: "Projeler", href: "/projects" },
+  { label: "Yatırımcılar", href: "/investors" },
+  { label: "Geliştiriciler", href: "/developers" },
 ];
 
 const Navbar: React.FC<NavbarProps> = ({ isLogin = false }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const menuLinks = isLogin ? menuItemsTop : menuItemsBottom;
+  const menuLinks = !isLogin ? menuItemsTop : menuItemsBottom;
 
   return (
     <nav className="w-full max-w-6xl container mx-auto bg-white py-4 flex items-center justify-between relative">
@@ -37,12 +37,13 @@ const Navbar: React.FC<NavbarProps> = ({ isLogin = false }) => {
         <Logo variant="withText" />
         <div className="hidden md:flex gap-2 ml-6">
           {menuLinks.map((item) => (
-            <span
-              key={item}
+            <a
+              key={item.href}
+              href={item.href}
               className="text-text group font-nunito text-base px-2 py-1 hover:text-primary cursor-pointer transition flex items-center"
             >
-              {item}
-              {isLogin && item === "Topluluk" && (
+              {item.label}
+              {isLogin && item.label === "Topluluk" && (
                 <Icon
                   icon="hugeicons:arrow-down-01"
                   width={18}
@@ -50,7 +51,7 @@ const Navbar: React.FC<NavbarProps> = ({ isLogin = false }) => {
                   className="ml-1 align-middle text-text/50 group-hover:text-primary"
                 />
               )}
-            </span>
+            </a>
           ))}
         </div>
       </div>
@@ -111,12 +112,13 @@ const Navbar: React.FC<NavbarProps> = ({ isLogin = false }) => {
           </button>
           <div className="flex-1 flex flex-col gap-1 px-4 py-6">
             {menuLinks.map((item) => (
-              <span
-                key={item}
+              <a
+                key={item.href}
+                href={item.href}
                 className="text-text font-nunito text-base py-2 px-2 hover:text-primary cursor-pointer transition flex items-center"
               >
-                {item}
-                {isLogin && item === "Topluluk" && (
+                {item.label}
+                {isLogin && item.label === "Topluluk" && (
                   <Icon
                     icon="hugeicons:arrow-down-01"
                     width={16}
@@ -124,7 +126,7 @@ const Navbar: React.FC<NavbarProps> = ({ isLogin = false }) => {
                     className="ml-1 align-middle text-text/50 group-hover:text-primary"
                   />
                 )}
-              </span>
+              </a>
             ))}
           </div>
           <div className="px-4 pb-6 flex flex-col gap-3">
