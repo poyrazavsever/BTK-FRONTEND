@@ -43,7 +43,6 @@ const Button: React.FC<ButtonProps> = ({
       disabled={disabled}
       onClick={onClick}
     >
-      {variant === "link" && <span className="mr-2">↗</span>}
       {children}
     </button>
   );
