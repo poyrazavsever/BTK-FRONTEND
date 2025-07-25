@@ -16,7 +16,7 @@ const Button: React.FC<ButtonProps> = ({
   className = "",
 }) => {
   let baseStyle =
-    "w-full py-3 px-6 rounded-md font-medium text-lg transition-all duration-200 flex items-center justify-center";
+    "w-full py-3 px-6 rounded-md font-poppins font-regu text-lg transition-all duration-200 flex items-center justify-center";
   let variantStyle = "";
 
   switch (variant) {
