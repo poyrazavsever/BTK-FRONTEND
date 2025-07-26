@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import Logo from "@/components/ui/logo";
 import Button from "@/components/ui/button";
@@ -19,7 +20,7 @@ const menuItemsTop = [
 ];
 
 const menuItemsBottom = [
-  { label: "Nasıl Çalışır", href: "/how-it-works" },
+  { label: "Nasıl Çalışır", href: "/" },
   { label: "Keşfet", href: "/explore" },
   { label: "Fikirler", href: "/ideas" },
   { label: "Projeler", href: "/projects" },
@@ -27,10 +28,58 @@ const menuItemsBottom = [
   { label: "Geliştiriciler", href: "/developers" },
 ];
 
-const Navbar: React.FC<NavbarProps> = ({ isLogin = false }) => {
+const Navbar: React.FC<NavbarProps> = ({ isLogin = true }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const menuLinks = !isLogin ? menuItemsTop : menuItemsBottom;
+
+  const [profileOpen, setProfileOpen] = useState(false);
+  const profileRef = useRef<HTMLDivElement>(null);
+
+  // Dışarı tıklanınca kapat
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(e.target as Node)
+      ) {
+        setProfileOpen(false);
+      }
+    }
+    if (profileOpen) {
+      document.addEventListener("mousedown", handleClick);
+    } else {
+      document.removeEventListener("mousedown", handleClick);
+    }
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [profileOpen]);
+
+  const profileMenu = [
+    { label: "Profilim", href: "/profile", icon: "hugeicons:user-account" },
+    { label: "Ayarlar", href: "/settings", icon: "hugeicons:settings-01" },
+    {
+      label: "Şifre Değiştir",
+      href: "/auth/reset-password",
+      icon: "hugeicons:lock-password",
+    },
+    {
+      label: "Bildirimler",
+      href: "/notifications",
+      icon: "hugeicons:notification-01",
+    },
+    {
+      label: "Karanlık Mod",
+      href: "#",
+      icon: "hugeicons:moon-01",
+      action: () => {},
+    },
+    {
+      label: "Çıkış Yap",
+      href: "/logout",
+      icon: "hugeicons:logout-01",
+      danger: true,
+    },
+  ];
 
   return (
     <nav className="w-full max-w-6xl container mx-auto bg-white py-4 flex items-center justify-between relative">
@@ -90,11 +139,49 @@ const Navbar: React.FC<NavbarProps> = ({ isLogin = false }) => {
               height={28}
               className="text-gray-600 hover:text-primary cursor-pointer transition"
             />
-            <img
-              src="/images/defaultAvatar.png"
-              alt="Profil"
-              className="w-8 h-8 rounded-full object-cover border border-gray-300 ml-2"
-            />
+            <div className="relative" ref={profileRef}>
+              <img
+                src="/images/defaultAvatar.png"
+                alt="Profil"
+                className="w-8 h-8 rounded-full object-cover border-2 border-primary/30 ml-2 cursor-pointer shadow-sm transition hover:scale-105"
+                onClick={() => setProfileOpen((v) => !v)}
+                tabIndex={0}
+              />
+              <AnimatePresence>
+                {profileOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.18 }}
+                    className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 min-w-[200px]"
+                  >
+                    {profileMenu.map((item, i) => (
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        onClick={item.action}
+                        className={`flex items-center gap-3 px-4 py-2 text-sm font-medium transition-colors hover:bg-primary/10 focus:bg-primary/10 focus:outline-none ${
+                          item.danger
+                            ? "text-red-600 hover:bg-red-50"
+                            : "text-text"
+                        }`}
+                      >
+                        <Icon
+                          icon={item.icon}
+                          width={20}
+                          height={20}
+                          className={
+                            item.danger ? "text-red-500" : "text-primary"
+                          }
+                        />
+                        <span>{item.label}</span>
+                      </a>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         )}
       </div>
