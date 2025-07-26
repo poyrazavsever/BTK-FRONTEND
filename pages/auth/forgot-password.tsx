@@ -1,61 +1,49 @@
 import React from "react";
 import Logo from "@/components/ui/logo";
-import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-interface LoginFormValues {
+interface ForgotPasswordFormValues {
   email: string;
-  password: string;
 }
 
-const initialValues: LoginFormValues = {
+const initialValues: ForgotPasswordFormValues = {
   email: "",
-  password: "",
 };
 
 const validationSchema = Yup.object({
   email: Yup.string()
     .email("Geçerli bir e-posta girin")
     .required("E-posta zorunlu"),
-  password: Yup.string()
-    .min(8, "En az 8 karakter olmalı")
-    .required("Şifre zorunlu"),
 });
 
 interface AuthPageComponent extends React.FC {
   isAuthPage?: boolean;
 }
 
-const Login: AuthPageComponent = () => {
+const ForgotPassword: AuthPageComponent = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-white">
       {/* Sol: Form alanı */}
       <div className="flex-1 flex flex-col justify-center items-center px-6 py-12">
         <div className="w-full max-w-md mx-auto">
-          <h1 className="text-header font-bold text-2xl md:text-3xl mb-2 text-center md:text-left flex items-center gap-2">
-            Tekrar Hoş Geldin <span className="text-2xl">👋</span>
+          <h1 className="text-header font-bold text-2xl md:text-3xl mb-2 text-center md:text-left">
+            Şifremi Unuttum
           </h1>
           <p className="text-text text-base mb-6 text-center md:text-left">
-            Bugün yeni bir gün, fikirleri görmek için heyecanlı mısın?
+            Kayıtlı e-posta adresini gir, sana şifre sıfırlama bağlantısı
+            gönderelim.
           </p>
-          <Formik<LoginFormValues, { status?: string }>
+          <Formik<ForgotPasswordFormValues, { status?: string }>
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={async (
-              values,
-              {
-                setSubmitting,
-                setStatus,
-              }: FormikHelpers<LoginFormValues> & {
-                setStatus: (status?: string) => void;
-              }
-            ) => {
+            onSubmit={async (values, { setSubmitting, setStatus }) => {
               setStatus(undefined);
               try {
-                // API isteği burada yapılacak
-                // örn: await api.login(values)
-                // Başarılı girişte yönlendirme veya state güncellemesi
-                // window.location.href = "/";
+                // await api.forgotPassword(values.email)
+                setStatus(
+                  "E-posta gönderildi! Lütfen gelen kutunu kontrol et."
+                );
               } catch (err: any) {
                 setStatus(err?.message || "Bir hata oluştu");
               } finally {
@@ -81,32 +69,14 @@ const Login: AuthPageComponent = () => {
                     )}
                   </ErrorMessage>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-text mb-1">
-                    Şifre
-                  </label>
-                  <Field
-                    name="password"
-                    type="password"
-                    placeholder="En az 8 karakter"
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30 text-base"
-                  />
-                  <ErrorMessage name="password">
-                    {(msg) => (
-                      <div className="text-xs text-red-500 mt-1">{msg}</div>
-                    )}
-                  </ErrorMessage>
-                </div>
-                <div className="flex justify-end">
-                  <a
-                    href="/auth/forgot-password"
-                    className="text-primary text-sm font-medium hover:underline"
-                  >
-                    Şifremi Unuttum
-                  </a>
-                </div>
                 {status && (
-                  <div className="text-xs text-red-500 text-center">
+                  <div
+                    className={`text-xs text-center ${
+                      status.includes("gönderildi")
+                        ? "text-green-600"
+                        : "text-red-500"
+                    }`}
+                  >
                     {status}
                   </div>
                 )}
@@ -115,18 +85,17 @@ const Login: AuthPageComponent = () => {
                   className="w-full bg-primary text-white font-semibold rounded-lg py-2 mt-2 transition hover:bg-primary/90 disabled:opacity-60"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Giriş Yapılıyor..." : "Giriş Yap"}
+                  {isSubmitting ? "Gönderiliyor..." : "Gönder"}
                 </button>
               </Form>
             )}
           </Formik>
-          <div className="mt-6 text-center text-sm text-text">
-            Daha hesap oluşturmadın mı?{" "}
+          <div className="mt-6 text-left text-sm text-text">
             <a
-              href="/auth/register"
+              href="/auth/login"
               className="text-primary font-medium hover:underline"
             >
-              Hesap Oluştur.
+              Şifremi hatırladım, giriş yapmak istiyorum
             </a>
           </div>
         </div>
@@ -155,5 +124,5 @@ const Login: AuthPageComponent = () => {
   );
 };
 
-Login.isAuthPage = true;
-export default Login;
+ForgotPassword.isAuthPage = true;
+export default ForgotPassword;
