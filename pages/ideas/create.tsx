@@ -10,7 +10,7 @@ import StepAIEval from "@/components/ideas/StepAIEval";
 import { div } from "framer-motion/client";
 
 interface AuthPageComponent extends React.FC {
-  isAuthPage?: boolean;
+  isNotLayout?: boolean;
 }
 
 // const Create = () => {
@@ -166,5 +166,5 @@ const Create: AuthPageComponent = () => {
   );
 };
 
-Create.isAuthPage = true;
+Create.isNotLayout = true;
 export default Create;

@@ -7,8 +7,8 @@ export default function App({
   pageProps,
 }: AppProps & { Component: any }) {
   // Eğer sayfa componenti isAuthPage prop'una sahipse, Layout'u sarmadan döndür
-  const isAuthPage = Component.isAuthPage;
-  if (isAuthPage) {
+  const isNotLayout = Component.isNotLayout;
+  if (isNotLayout) {
     return <Component {...pageProps} />;
   }
   return (

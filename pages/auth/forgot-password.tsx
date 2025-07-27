@@ -18,7 +18,7 @@ const validationSchema = Yup.object({
 });
 
 interface AuthPageComponent extends React.FC {
-  isAuthPage?: boolean;
+  isNotLayout?: boolean;
 }
 
 const ForgotPassword: AuthPageComponent = () => {
@@ -124,5 +124,5 @@ const ForgotPassword: AuthPageComponent = () => {
   );
 };
 
-ForgotPassword.isAuthPage = true;
+ForgotPassword.isNotLayout = true;
 export default ForgotPassword;

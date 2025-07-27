@@ -23,7 +23,7 @@ const validationSchema = Yup.object({
 });
 
 interface AuthPageComponent extends React.FC {
-  isAuthPage?: boolean;
+  isNotLayout: boolean;
 }
 
 const Login: AuthPageComponent = () => {
@@ -155,5 +155,5 @@ const Login: AuthPageComponent = () => {
   );
 };
 
-Login.isAuthPage = true;
+Login.isNotLayout = true;
 export default Login;

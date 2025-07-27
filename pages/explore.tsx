@@ -8,4 +8,5 @@ const Explore = () => {
   )
 }
 
+Explore.isNotLayout = true
 export default Explore

@@ -53,7 +53,11 @@ const stepSchemas = [
   }),
 ];
 
-const Register: React.FC & { isAuthPage?: boolean } = () => {
+interface RegisterComponent extends React.FC {
+  isNotLayout?: boolean;
+}
+
+const Register: RegisterComponent = () => {
   const [step, setStep] = useState(0);
   const [emailForCode, setEmailForCode] = useState("");
   const [codeTimer, setCodeTimer] = useState(0);
@@ -344,5 +348,5 @@ const Register: React.FC & { isAuthPage?: boolean } = () => {
   );
 };
 
-Register.isAuthPage = true;
+Register.isNotLayout = true;
 export default Register;
