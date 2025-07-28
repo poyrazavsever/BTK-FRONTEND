@@ -127,18 +127,21 @@ const Navbar: React.FC<NavbarProps> = ({ isLogin = true }) => {
           </>
         ) : (
           <div className="flex items-center gap-4">
-            <Icon
-              icon="hugeicons:dashboard-square-01"
-              width={28}
-              height={28}
-              className="text-gray-600 hover:text-primary cursor-pointer transition"
-            />
-            <Icon
-              icon="hugeicons:notification-01"
-              width={28}
-              height={28}
-              className="text-gray-600 hover:text-primary cursor-pointer transition"
-            />
+            <a href="/panel">
+                <Icon
+                  icon="hugeicons:dashboard-square-01"
+                  width={28}
+                  height={28}
+                  className="text-gray-600 hover:text-primary cursor-pointer transition"
+                /></a>
+            <a href="/notifications">
+              <Icon
+                icon="hugeicons:notification-01"
+                width={28}
+                height={28}
+                className="text-gray-600 hover:text-primary cursor-pointer transition"
+              />
+            </a>
             <div className="relative" ref={profileRef}>
               <img
                 src="/images/defaultAvatar.png"
@@ -248,18 +251,22 @@ const Navbar: React.FC<NavbarProps> = ({ isLogin = true }) => {
               </>
             ) : (
               <div className="flex items-center gap-4">
-                <Icon
-                  icon="hugeicons:dashboard-square-01"
-                  width={28}
-                  height={28}
-                  className="text-gray-600 hover:text-primary cursor-pointer transition"
-                />
-                <Icon
-                  icon="hugeicons:notification-01"
-                  width={28}
-                  height={28}
-                  className="text-gray-600 hover:text-primary cursor-pointer transition"
-                />
+                <a href="/panel">
+                  <Icon
+                    icon="hugeicons:dashboard-square-01"
+                    width={28}
+                    height={28}
+                    className="text-gray-600 hover:text-primary cursor-pointer transition"
+                  />
+                </a>
+                <a href="/notifications">
+                  <Icon
+                    icon="hugeicons:notification-01"
+                    width={28}
+                    height={28}
+                    className="text-gray-600 hover:text-primary cursor-pointer transition"
+                  />
+                </a>
                 <img
                   src="/images/defaultAvatar.png"
                   alt="Profil"
