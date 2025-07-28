@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+import ApplyProjects from "@/components/projects/applyProjects";
+import IncludedProjects from "@/components/projects/includedProjects";
+
 const tabList = [
     { key: "applied", label: "Başvurduğun Projeler" },
     { key: "joined", label: "Dahil Olduğun Projeler" },
@@ -28,18 +31,12 @@ const Projects = () => {
 
             {activeTab === "applied" && (
                 <div>
-                    {/* Başvurduğun Projeler içeriği buraya gelecek */}
-                    <div className="text-center text-gray-500 text-lg">
-                        Henüz başvurduğun bir proje yok.
-                    </div>
+                    <ApplyProjects />
                 </div>
             )}
             {activeTab === "joined" && (
                 <div>
-                    {/* Dahil olduğun projeler içeriği buraya gelecek */}
-                    <div className="bg-white border border-gray-200 rounded-xl p-8 text-center text-gray-500 text-lg shadow">
-                        Henüz dahil olduğun bir proje yok.
-                    </div>
+                    <IncludedProjects />
                 </div>
             )}
         </div>
