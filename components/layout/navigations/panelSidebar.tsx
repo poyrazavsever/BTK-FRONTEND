@@ -8,8 +8,6 @@ const sidebarLinks = [
     { label: 'Fikirleriniz', icon: 'mdi:lightbulb-on-outline', href: '/panel/ideas' },
     { label: 'Projeleriniz', icon: 'mdi:folder-outline', href: '/panel/projects' },
     { label: 'Yatırımlarınız', icon: 'mdi:finance', href: '/panel/investments' },
-    { label: 'Takip Ettikleriniz', icon: 'mdi:eye-outline', href: '/panel/following' },
-    { label: 'Bildirimler', icon: 'mdi:bell-outline', href: '/panel/notifications' },
     { label: 'Mesajlar', icon: 'mdi:email-outline', href: '/panel/messages' },
 ];
 
