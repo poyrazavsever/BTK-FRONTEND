@@ -1,5 +1,7 @@
+
 import React from "react";
 import { Icon } from "@iconify/react";
+import Button from "@/components/ui/button";
 
 export interface IdeaCardProps {
   user: {
@@ -67,12 +69,13 @@ const IdeaCard: React.FC<IdeaCardProps> = ({
           <span>{participants}</span>
         </div>
       </div>
-      <button
+      <Button
         onClick={onDetail}
-        className="w-full bg-primary text-white font-semibold rounded-lg py-2 transition hover:bg-primary/90 text-base"
+        variant="primary"
+        className="w-full"
       >
         Detaylar
-      </button>
+      </Button>
     </div>
   );
 };
