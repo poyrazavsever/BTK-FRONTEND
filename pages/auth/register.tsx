@@ -144,273 +144,273 @@ const Register: RegisterComponent = () => {
 
                 return (
                   <Form className="space-y-4">
-                  {/* 1. Adım: Ad Soyad, E-posta */}
-                  {step === 1 && (
-                    <>
-                      <h1 className="text-header font-bold text-2xl md:text-3xl mb-2 text-center md:text-left flex items-center gap-2">
-                        Hoş Geldin <span className="text-2xl">👋</span>
-                      </h1>
-                      <p className="text-text text-base mb-4 text-center md:text-left">
-                        Yeni bir dünyaya dalış yapmaya, fikir paylaşmaya, paylaştıkça büyümeye hazır mısın?
-                      </p>
-                      <div>
-                        <label className="block text-sm font-medium text-text mb-1">
-                          Ad - Soyad
-                        </label>
-                        <Field
-                          name="name"
-                          type="text"
-                          placeholder="Poyraz Avsever"
-                          className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30 text-base"
-                        />
-                        <ErrorMessage name="name">
-                          {(msg) => (
-                            <div className="text-xs text-red-500 mt-1">{msg}</div>
-                          )}
-                        </ErrorMessage>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-text mb-1">
-                          E-Posta
-                        </label>
-                        <Field
-                          name="email"
-                          type="email"
-                          placeholder="example@email.com"
-                          className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30 text-base"
-                        />
-                        <ErrorMessage name="email">
-                          {(msg) => (
-                            <div className="text-xs text-red-500 mt-1">{msg}</div>
-                          )}
-                        </ErrorMessage>
-                      </div>
-                    </>
-                  )}
-                  {/* 2. Adım: Şifre */}
-                  {step === 2 && (
-                    <>
-                      <h1 className="text-header font-bold text-2xl md:text-3xl mb-2 text-center md:text-left">
-                        Güçlü Bir Şifre Lazım!
-                      </h1>
-                      <p className="text-text text-base mb-4 text-center md:text-left">
-                        Bu dünyada seni korumamız için bize güçlü bir şifre vermen lazım.
-                      </p>
-                      <div>
-                        <label className="block text-sm font-medium text-text mb-1">
-                          Şifre
-                        </label>
-                        <Field
-                          name="password"
-                          type="password"
-                          placeholder="************"
-                          className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30 text-base"
-                        />
-                        <ErrorMessage name="password">
-                          {(msg) => (
-                            <div className="text-xs text-red-500 mt-1">{msg}</div>
-                          )}
-                        </ErrorMessage>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-text mb-1">
-                          Yeniden Şifre
-                        </label>
-                        <Field
-                          name="passwordConfirm"
-                          type="password"
-                          placeholder="************"
-                          className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30 text-base"
-                        />
-                        <ErrorMessage name="passwordConfirm">
-                          {(msg) => (
-                            <div className="text-xs text-red-500 mt-1">{msg}</div>
-                          )}
-                        </ErrorMessage>
-                      </div>
-                    </>
-                  )}
-                  {/* 3. Adım: Telefon */}
-                  {step === 3 && (
-                    <>
-                      <h1 className="text-header font-bold text-2xl md:text-3xl mb-2 text-center md:text-left">
-                        Numaranı alabilir miyim?
-                      </h1>
-                      <p className="text-text text-base mb-4 text-center md:text-left">
-                        Çift faktörlü doğrulama açmak ister misin? Telefon numaran yeterli?
-                      </p>
-                      <div>
-                        <label className="block text-sm font-medium text-text mb-1">
-                          Telefon Numarası
-                        </label>
-                        <Field
-                          name="phone"
-                          type="tel"
-                          placeholder="+90"
-                          className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30 text-base"
-                        />
-                        <ErrorMessage name="phone">
-                          {(msg) => (
-                            <div className="text-xs text-red-500 mt-1">{msg}</div>
-                          )}
-                        </ErrorMessage>
-                      </div>
-                      <div className="flex gap-2 mt-2">
-                        <button
-                          type="button"
-                          className="w-full border border-primary text-primary font-semibold rounded-lg py-2 transition hover:bg-primary/10 disabled:opacity-60"
-                          onClick={() => setStep(4)}
-                        >
-                          Atla
-                        </button>
-                      </div>
-                    </>
-                  )}
-                  {/* 4. Adım: Kod */}
-                  {step === 4 && (
-                    <>
-                      <h1 className="text-header font-bold text-2xl md:text-3xl mb-2 text-center md:text-left">
-                        Doğrulama Kodu
-                      </h1>
-                      <p className="text-text text-base mb-4 text-center md:text-left">
-                        E-Posta adresine gelen doğrulama kodunu buraya girer misin?
-                      </p>
-                      <div className="flex gap-2 justify-center mb-2">
-                        {[0, 1, 2, 3, 4].map((i) => (
-                          <input
-                            key={i}
-                            ref={codeRefs[i]}
+                    {/* 1. Adım: Ad Soyad, E-posta */}
+                    {step === 1 && (
+                      <>
+                        <h1 className="text-header font-bold text-2xl md:text-3xl mb-2 text-center md:text-left flex items-center gap-2">
+                          Hoş Geldin <span className="text-2xl">👋</span>
+                        </h1>
+                        <p className="text-text text-base mb-4 text-center md:text-left">
+                          Yeni bir dünyaya dalış yapmaya, fikir paylaşmaya, paylaştıkça büyümeye hazır mısın?
+                        </p>
+                        <div>
+                          <label className="block text-sm font-medium text-text mb-1">
+                            Ad - Soyad
+                          </label>
+                          <Field
+                            name="name"
                             type="text"
-                            inputMode="numeric"
-                            maxLength={1}
-                            className="w-12 h-12 text-center text-2xl border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30"
-                            value={codeInputs[i]}
-                            onChange={e => handleCodeInput(i, e.target.value.replace(/[^0-9]/g, ""))}
-                            onFocus={e => e.target.select()}
+                            placeholder="Poyraz Avsever"
+                            className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30 text-base"
                           />
-                        ))}
-                      </div>
-                      <ErrorMessage name="code">
-                        {(msg) => (
-                          <div className="text-xs text-red-500 text-center mb-2">{msg}</div>
-                        )}
-                      </ErrorMessage>
-                      <div className="flex gap-2 justify-center">
+                          <ErrorMessage name="name">
+                            {(msg) => (
+                              <div className="text-xs text-red-500 mt-1">{msg}</div>
+                            )}
+                          </ErrorMessage>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-text mb-1">
+                            E-Posta
+                          </label>
+                          <Field
+                            name="email"
+                            type="email"
+                            placeholder="example@email.com"
+                            className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30 text-base"
+                          />
+                          <ErrorMessage name="email">
+                            {(msg) => (
+                              <div className="text-xs text-red-500 mt-1">{msg}</div>
+                            )}
+                          </ErrorMessage>
+                        </div>
+                      </>
+                    )}
+                    {/* 2. Adım: Şifre */}
+                    {step === 2 && (
+                      <>
+                        <h1 className="text-header font-bold text-2xl md:text-3xl mb-2 text-center md:text-left">
+                          Güçlü Bir Şifre Lazım!
+                        </h1>
+                        <p className="text-text text-base mb-4 text-center md:text-left">
+                          Bu dünyada seni korumamız için bize güçlü bir şifre vermen lazım.
+                        </p>
+                        <div>
+                          <label className="block text-sm font-medium text-text mb-1">
+                            Şifre
+                          </label>
+                          <Field
+                            name="password"
+                            type="password"
+                            placeholder="************"
+                            className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30 text-base"
+                          />
+                          <ErrorMessage name="password">
+                            {(msg) => (
+                              <div className="text-xs text-red-500 mt-1">{msg}</div>
+                            )}
+                          </ErrorMessage>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-text mb-1">
+                            Yeniden Şifre
+                          </label>
+                          <Field
+                            name="passwordConfirm"
+                            type="password"
+                            placeholder="************"
+                            className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30 text-base"
+                          />
+                          <ErrorMessage name="passwordConfirm">
+                            {(msg) => (
+                              <div className="text-xs text-red-500 mt-1">{msg}</div>
+                            )}
+                          </ErrorMessage>
+                        </div>
+                      </>
+                    )}
+                    {/* 3. Adım: Telefon */}
+                    {step === 3 && (
+                      <>
+                        <h1 className="text-header font-bold text-2xl md:text-3xl mb-2 text-center md:text-left">
+                          Numaranı alabilir miyim?
+                        </h1>
+                        <p className="text-text text-base mb-4 text-center md:text-left">
+                          Çift faktörlü doğrulama açmak ister misin? Telefon numaran yeterli?
+                        </p>
+                        <div>
+                          <label className="block text-sm font-medium text-text mb-1">
+                            Telefon Numarası
+                          </label>
+                          <Field
+                            name="phone"
+                            type="tel"
+                            placeholder="+90"
+                            className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30 text-base"
+                          />
+                          <ErrorMessage name="phone">
+                            {(msg) => (
+                              <div className="text-xs text-red-500 mt-1">{msg}</div>
+                            )}
+                          </ErrorMessage>
+                        </div>
+                        <div className="flex gap-2 mt-2">
+                          <button
+                            type="button"
+                            className="w-full border border-primary text-primary font-semibold rounded-lg py-2 transition hover:bg-primary/10 disabled:opacity-60"
+                            onClick={() => setStep(4)}
+                          >
+                            Atla
+                          </button>
+                        </div>
+                      </>
+                    )}
+                    {/* 4. Adım: Kod */}
+                    {step === 4 && (
+                      <>
+                        <h1 className="text-header font-bold text-2xl md:text-3xl mb-2 text-center md:text-left">
+                          Doğrulama Kodu
+                        </h1>
+                        <p className="text-text text-base mb-4 text-center md:text-left">
+                          E-Posta adresine gelen doğrulama kodunu buraya girer misin?
+                        </p>
+                        <div className="flex gap-2 justify-center mb-2">
+                          {[0, 1, 2, 3, 4].map((i) => (
+                            <input
+                              key={i}
+                              ref={codeRefs[i]}
+                              type="text"
+                              inputMode="numeric"
+                              maxLength={1}
+                              className="w-12 h-12 text-center text-2xl border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30"
+                              value={codeInputs[i]}
+                              onChange={e => handleCodeInput(i, e.target.value.replace(/[^0-9]/g, ""))}
+                              onFocus={e => e.target.select()}
+                            />
+                          ))}
+                        </div>
+                        <ErrorMessage name="code">
+                          {(msg) => (
+                            <div className="text-xs text-red-500 text-center mb-2">{msg}</div>
+                          )}
+                        </ErrorMessage>
+                        <div className="flex gap-2 justify-center">
+                          <button
+                            type="button"
+                            className="border border-primary text-primary rounded-lg px-4 py-2 text-sm disabled:opacity-60"
+                            onClick={() => handleSendCode(values.email)}
+                            disabled={codeTimer > 0}
+                          >
+                            {codeTimer > 0 ? `Tekrar Gönder (${codeTimer})` : "Tekrar Gönder"}
+                          </button>
+                          <button
+                            type="submit"
+                            className="bg-primary text-white rounded-lg px-4 py-2 text-sm font-semibold"
+                            disabled={isSubmitting}
+                          >
+                            Sonraki Adım
+                          </button>
+                        </div>
+                      </>
+                    )}
+                    {/* 5. Adım: Geliştirici veya Yatırımcı için ekstra */}
+                    {category === "developer" && step === 5 && (
+                      <>
+                        <DevExtraStep
+                          values={devExtra}
+                          onFileChange={(field, file) => setDevExtra((prev) => ({ ...prev, [field]: file }))}
+                        />
                         <button
                           type="button"
-                          className="border border-primary text-primary rounded-lg px-4 py-2 text-sm disabled:opacity-60"
-                          onClick={() => handleSendCode(values.email)}
-                          disabled={codeTimer > 0}
+                          className="w-full bg-primary text-white font-semibold rounded-lg py-2 mt-4 transition hover:bg-primary/90 disabled:opacity-60"
+                          onClick={() => {
+                            const devExtraOut = {
+                              cv: devExtra.cv ? devExtra.cv.name : undefined,
+                              idFront: devExtra.idFront ? devExtra.idFront.name : undefined
+                            };
+                            alert(
+                              JSON.stringify({
+                                ...values,
+                                category,
+                                devExtra: devExtraOut,
+                              }, null, 2)
+                            );
+                          }}
                         >
-                          {codeTimer > 0 ? `Tekrar Gönder (${codeTimer})` : "Tekrar Gönder"}
+                          Kaydı Tamamla
                         </button>
+                      </>
+                    )}
+                    {category === "investor" && step === 5 && (
+                      <>
+                        <InvestorExtraStep
+                          values={investorExtra}
+                          onChange={(field, value) => setInvestorExtra((prev) => ({ ...prev, [field]: value }))}
+                        />
                         <button
-                          type="submit"
-                          className="bg-primary text-white rounded-lg px-4 py-2 text-sm font-semibold"
-                          disabled={isSubmitting}
+                          type="button"
+                          className="w-full bg-primary text-white font-semibold rounded-lg py-2 mt-4 transition hover:bg-primary/90 disabled:opacity-60"
+                          onClick={() => {
+                            alert(
+                              JSON.stringify({
+                                ...values,
+                                category,
+                                investorExtra,
+                              }, null, 2)
+                            );
+                          }}
                         >
-                          Sonraki Adım
+                          Kaydı Tamamla
                         </button>
-                      </div>
-                    </>
-                  )}
-                  {/* 5. Adım: Geliştirici veya Yatırımcı için ekstra */}
-                  {category === "developer" && step === 5 && (
-                    <>
-                      <DevExtraStep
-                        values={devExtra}
-                        onFileChange={(field, file) => setDevExtra((prev) => ({ ...prev, [field]: file }))}
-                      />
+                      </>
+                    )}
+                    {/* Son adımda tamamla butonu */}
+                    {((category === "user" && step === 4) || (category !== "user" && step === 6)) ? (
                       <button
-                        type="button"
-                        className="w-full bg-primary text-white font-semibold rounded-lg py-2 mt-4 transition hover:bg-primary/90 disabled:opacity-60"
-                        onClick={() => {
-                          const devExtraOut = {
+                        type="submit"
+                        className="w-full bg-primary text-white font-semibold rounded-lg py-2 mt-2 transition hover:bg-primary/90 disabled:opacity-60"
+                        disabled={isSubmitting}
+                        onClick={e => {
+                          e.preventDefault();
+                          // Dosya adlarını ekle
+                          const devExtraOut = devExtra ? {
                             cv: devExtra.cv ? devExtra.cv.name : undefined,
                             idFront: devExtra.idFront ? devExtra.idFront.name : undefined
-                          };
-                          alert(
-                            JSON.stringify({
-                              ...values,
-                              category,
-                              devExtra: devExtraOut,
-                            }, null, 2)
-                          );
+                          } : undefined;
+                          const investorExtraOut = investorExtra ? { ...investorExtra } : undefined;
+                          alert(JSON.stringify({
+                            ...values,
+                            category,
+                            ...(category === "developer" ? { devExtra: devExtraOut } : {}),
+                            ...(category === "investor" ? { investorExtra: investorExtraOut } : {}),
+                          }, null, 2));
                         }}
                       >
                         Kaydı Tamamla
                       </button>
-                    </>
-                  )}
-                  {category === "investor" && step === 5 && (
-                    <>
-                      <InvestorExtraStep
-                        values={investorExtra}
-                        onChange={(field, value) => setInvestorExtra((prev) => ({ ...prev, [field]: value }))}
-                      />
+                    ) : step > 0 && step < getTotalSteps() - 1 ? (
                       <button
-                        type="button"
-                        className="w-full bg-primary text-white font-semibold rounded-lg py-2 mt-4 transition hover:bg-primary/90 disabled:opacity-60"
-                        onClick={() => {
-                          alert(
-                            JSON.stringify({
-                              ...values,
-                              category,
-                              investorExtra,
-                            }, null, 2)
-                          );
-                        }}
+                        type="submit"
+                        className="w-full bg-primary text-white font-semibold rounded-lg py-2 mt-2 transition hover:bg-primary/90 disabled:opacity-60"
+                        disabled={isSubmitting}
                       >
-                        Kaydı Tamamla
+                        Sonraki Adım
                       </button>
-                    </>
-                  )}
-                  {/* Son adımda tamamla butonu */}
-                  {((category === "user" && step === 4) || (category !== "user" && step === 6)) ? (
-                    <button
-                      type="submit"
-                      className="w-full bg-primary text-white font-semibold rounded-lg py-2 mt-2 transition hover:bg-primary/90 disabled:opacity-60"
-                      disabled={isSubmitting}
-                      onClick={e => {
-                        e.preventDefault();
-                        // Dosya adlarını ekle
-                        const devExtraOut = devExtra ? {
-                          cv: devExtra.cv ? devExtra.cv.name : undefined,
-                          idFront: devExtra.idFront ? devExtra.idFront.name : undefined
-                        } : undefined;
-                        const investorExtraOut = investorExtra ? { ...investorExtra } : undefined;
-                        alert(JSON.stringify({
-                          ...values,
-                          category,
-                          ...(category === "developer" ? { devExtra: devExtraOut } : {}),
-                          ...(category === "investor" ? { investorExtra: investorExtraOut } : {}),
-                        }, null, 2));
-                      }}
-                    >
-                      Kaydı Tamamla
-                    </button>
-                  ) : step > 0 && step < getTotalSteps() - 1 ? (
-                    <button
-                      type="submit"
-                      className="w-full bg-primary text-white font-semibold rounded-lg py-2 mt-2 transition hover:bg-primary/90 disabled:opacity-60"
-                      disabled={isSubmitting}
-                    >
-                      Sonraki Adım
-                    </button>
-                  ) : null}
-                  {status && (
-                    <div className="text-xs text-red-500 text-center">{status}</div>
-                  )}
-                  <div className="mt-6 text-center text-sm text-text">
-                    Zaten bir hesabın var mı?{" "}
-                    <a
-                      href="/auth/login"
-                      className="text-primary font-medium hover:underline"
-                    >
-                      Oturum Aç.
-                    </a>
-                  </div>
-                </Form>
+                    ) : null}
+                    {status && (
+                      <div className="text-xs text-red-500 text-center">{status}</div>
+                    )}
+                    <div className="mt-6 text-center text-sm text-text">
+                      Zaten bir hesabın var mı?{" "}
+                      <a
+                        href="/auth/login"
+                        className="text-primary font-medium hover:underline"
+                      >
+                        Oturum Aç.
+                      </a>
+                    </div>
+                  </Form>
                 );
               }}
             </Formik>
