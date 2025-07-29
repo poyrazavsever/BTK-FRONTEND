@@ -12,7 +12,7 @@ const sidebarLinks = [
 ];
 
 const settingsLinks = [
-    { label: 'Profil Ayarları', icon: 'mdi:account-cog-outline', href: '/panel/profile' },
+    { label: 'Profil Ayarları', icon: 'mdi:account-cog-outline', href: '/panel/settings' },
     { label: 'Çıkış Yap', icon: 'mdi:logout', href: '/auth/login' },
 ];
 
