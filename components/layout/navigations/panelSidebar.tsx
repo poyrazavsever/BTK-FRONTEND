@@ -13,8 +13,6 @@ const sidebarLinks = [
 
 const settingsLinks = [
     { label: 'Profil Ayarları', icon: 'mdi:account-cog-outline', href: '/panel/profile' },
-    { label: 'Geliştirici Ol', icon: 'mdi:code-tags', href: '/panel/become-developer' },
-    { label: 'Yatırımcı Ol', icon: 'mdi:cash-plus', href: '/panel/become-investor' },
     { label: 'Çıkış Yap', icon: 'mdi:logout', href: '/auth/login' },
 ];
 
