@@ -1,29 +1,29 @@
 
 import React from "react";
 import { Icon } from "@iconify/react";
-import Button from "@/components/ui/button";
+import Link from "next/link";
 
-export interface IdeaCardProps {
+interface IdeaCardProps {
   user: {
     name: string;
     avatar: string;
   };
+  id: string | number;
   title: string;
   description: string;
   tags: string[];
   likes: number;
   participants: number;
-  onDetail?: () => void;
 }
 
 const IdeaCard: React.FC<IdeaCardProps> = ({
   user,
+  id,
   title,
   description,
   tags,
   likes,
   participants,
-  onDetail,
 }) => {
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-xs max-w-xl">
@@ -40,7 +40,7 @@ const IdeaCard: React.FC<IdeaCardProps> = ({
       </h2>
       <p className="text-text text-base mb-3 leading-snug">{description}</p>
       <div className="flex flex-wrap gap-2 mb-4">
-        {tags.map((tag) => (
+        {tags.map((tag: string) => (
           <span
             key={tag}
             className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-medium"
@@ -69,13 +69,12 @@ const IdeaCard: React.FC<IdeaCardProps> = ({
           <span>{participants}</span>
         </div>
       </div>
-      <Button
-        onClick={onDetail}
-        variant="primary"
-        className="w-full"
+      <Link
+        href={`/ideas/${id}`}
+        className="py-2 px-6 rounded-md font-poppins text-base cursor-pointer transition-all duration-200 flex items-center justify-center bg-primary text-background hover:bg-primary/90 w-full text-center"
       >
         Detaylar
-      </Button>
+      </Link>
     </div>
   );
 };

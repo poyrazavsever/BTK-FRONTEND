@@ -1,8 +1,9 @@
 import React, { useState, useMemo } from "react";
-import IdeaCard, { IdeaCardProps } from "@/components/shared/ideaCard";
+import IdeaCard from "@/components/shared/ideaCard";
 
-const mockIdeas: IdeaCardProps[] = [
+const mockIdeas = [
   {
+    id: 1,
     user: { name: "Poyraz Avsever", avatar: "/images/defaultAvatar.png" },
     title: "Ev Taşımayı Kolaylaştıran Akıllı Platform",
     description:
@@ -12,6 +13,7 @@ const mockIdeas: IdeaCardProps[] = [
     participants: 196,
   },
   {
+    id: 2,
     user: { name: "Halitcan Emir", avatar: "/images/defaultAvatar.png" },
     title: "Yapay Zeka ile Kişisel Finans Yönetimi",
     description:
@@ -21,6 +23,7 @@ const mockIdeas: IdeaCardProps[] = [
     participants: 88,
   },
   {
+    id: 3,
     user: { name: "Talha Tarlabaz", avatar: "/images/defaultAvatar.png" },
     title: "Sosyal Sorumluluk Proje Platformu",
     description:
@@ -30,6 +33,7 @@ const mockIdeas: IdeaCardProps[] = [
     participants: 54,
   },
   {
+    id: 4,
     user: { name: "Poyraz Avsever", avatar: "/images/defaultAvatar.png" },
     title: "Akıllı Ev Enerji Yönetimi",
     description:
@@ -134,11 +138,10 @@ const Ideas: React.FC = () => {
             Hiç fikir bulunamadı.
           </div>
         ) : (
-          filteredIdeas.map((idea, i) => (
+          filteredIdeas.map((idea) => (
             <IdeaCard
-              key={i}
+              key={idea.id}
               {...idea}
-              onDetail={() => alert("Detaylar: " + idea.title)}
             />
           ))
         )}

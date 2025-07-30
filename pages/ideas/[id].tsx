@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Icon } from "@iconify/react";
+
+import { motion, AnimatePresence } from "framer-motion";
 
 const idea = {
   user: { name: "Poyraz Avsever", avatar: "/images/defaultAvatar.png" },
@@ -13,6 +15,21 @@ const idea = {
 };
 
 const IdeasDetail: React.FC = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [reason, setReason] = useState("");
+  const [hours, setHours] = useState("");
+
+  const handleOpen = () => setShowModal(true);
+  const handleClose = () => {
+    setShowModal(false);
+    setReason("");
+    setHours("");
+  };
+  const handleSend = () => {
+    alert("Başvurunuz gönderildi!");
+    handleClose();
+  };
+
   return (
     <div className="max-w-5xl mx-auto py-10 px-4">
       {/* Başlık ve etiketler */}
@@ -159,10 +176,70 @@ const IdeasDetail: React.FC = () => {
       </div>
 
       <div className="flex justify-center mt-10">
-        <button className="bg-primary text-white font-semibold rounded-lg px-6 py-3 text-lg shadow hover:bg-primary/90 transition">
+        <button
+          className="bg-primary text-white font-semibold rounded-lg px-6 py-3 text-lg shadow hover:bg-primary/90 transition"
+          onClick={handleOpen}
+        >
           Projeye Katılma İsteği Oluştur
         </button>
       </div>
+
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-white rounded-xl shadow-xl p-8 w-full max-w-md relative"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            >
+              <button
+                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl"
+                onClick={handleClose}
+                aria-label="Kapat"
+              >
+                &times;
+              </button>
+              <h3 className="text-2xl font-bold mb-6 text-gray-800">Projeye Başvur</h3>
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Başvuru Sebebiniz</label>
+                <textarea
+                  className="w-full border border-gray-300 rounded-lg p-2 text-base focus:outline-primary"
+                  rows={3}
+                  value={reason}
+                  onChange={e => setReason(e.target.value)}
+                  placeholder="Neden bu projede yer almak istiyorsunuz?"
+                />
+              </div>
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Günde Kaç Saat Ayırabilirsin?</label>
+                <input
+                  type="number"
+                  min={1}
+                  max={24}
+                  className="w-full border border-gray-300 rounded-lg p-2 text-base focus:outline-primary"
+                  value={hours}
+                  onChange={e => setHours(e.target.value)}
+                  placeholder="Örn: 3"
+                />
+              </div>
+              <button
+                className="bg-primary text-white rounded-lg px-4 py-2 font-semibold w-full text-base hover:bg-primary/90 transition disabled:opacity-50"
+                onClick={handleSend}
+                disabled={!reason || !hours}
+              >
+                Gönder
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
