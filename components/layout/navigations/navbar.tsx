@@ -55,8 +55,8 @@ const Navbar: React.FC<NavbarProps> = ({ isLogin = true }) => {
   }, [profileOpen]);
 
   const profileMenu = [
-    { label: "Profilim", href: "/profile", icon: "hugeicons:user-account" },
-    { label: "Ayarlar", href: "/settings", icon: "hugeicons:settings-01" },
+    { label: "Profilim", href: "/profile/isim", icon: "hugeicons:user-account" },
+    { label: "Ayarlar", href: "/panel/settings", icon: "hugeicons:settings-01" },
     {
       label: "Şifre Değiştir",
       href: "/auth/reset-password",
