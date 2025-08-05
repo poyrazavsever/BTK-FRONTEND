@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "@/components/ui/logo";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
+import { authService } from "@/services/auth";
 
 interface LoginFormValues {
   email: string;
@@ -52,12 +53,15 @@ const Login: AuthPageComponent = () => {
             ) => {
               setStatus(undefined);
               try {
-                // API isteği burada yapılacak
-                // örn: await api.login(values)
-                // Başarılı girişte yönlendirme veya state güncellemesi
-                // window.location.href = "/";
+                const response = await authService.login(values);
+                authService.setToken(response.token);
+                window.location.href = "/";
               } catch (err: any) {
-                setStatus(err?.message || "Bir hata oluştu");
+                setStatus(
+                  err?.response?.data?.message ||
+                    err?.message ||
+                    "Giriş yapılırken bir hata oluştu"
+                );
               } finally {
                 setSubmitting(false);
               }

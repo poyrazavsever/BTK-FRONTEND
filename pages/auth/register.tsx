@@ -6,13 +6,14 @@ import { stepSchemas, initialValues } from "@/components/register/steps";
 import CategoryStep, { UserCategory } from "@/components/register/CategoryStep";
 import DevExtraStep from "@/components/register/DevExtraStep";
 import InvestorExtraStep from "@/components/register/InvestorExtraStep";
+import { authService } from "@/services/auth";
 
 interface RegisterComponent extends React.FC {
   isNotLayout?: boolean;
 }
 
 
-type ExtraDev = { cv: File | null; idFront: File | null };
+type ExtraDev = { cv?: File; idFront?: File };
 type ExtraInvestor = { cardNumber: string; cardName: string; cardExpiry: string; cardCvc: string };
 
 const Register: RegisterComponent = () => {
@@ -21,7 +22,7 @@ const Register: RegisterComponent = () => {
   const [emailForCode, setEmailForCode] = useState("");
   const [codeTimer, setCodeTimer] = useState(0);
   // Ekstra adım state'leri
-  const [devExtra, setDevExtra] = useState<ExtraDev>({ cv: null, idFront: null });
+  const [devExtra, setDevExtra] = useState<ExtraDev>({});
   const [investorExtra, setInvestorExtra] = useState<ExtraInvestor>({ cardNumber: "", cardName: "", cardExpiry: "", cardCvc: "" });
 
   // Kategoriye göre toplam adım sayısı
@@ -31,19 +32,23 @@ const Register: RegisterComponent = () => {
     return 1; // sadece kategori seçimi
   };
 
-  // Kod gönderme simülasyonu
-  const handleSendCode = (email: string) => {
-    setEmailForCode(email);
-    setCodeTimer(30);
-    const interval = setInterval(() => {
-      setCodeTimer((t) => {
-        if (t <= 1) {
-          clearInterval(interval);
-          return 0;
-        }
-        return t - 1;
-      });
-    }, 1000);
+  const handleSendCode = async (email: string) => {
+    try {
+      await authService.sendVerificationCode(email);
+      setEmailForCode(email);
+      setCodeTimer(30);
+      const interval = setInterval(() => {
+        setCodeTimer((t) => {
+          if (t <= 1) {
+            clearInterval(interval);
+            return 0;
+          }
+          return t - 1;
+        });
+      }, 1000);
+    } catch (error: any) {
+      alert(error?.response?.data?.message || "Kod gönderirken bir hata oluştu");
+    }
   };
 
 
@@ -100,10 +105,22 @@ const Register: RegisterComponent = () => {
                 }
                 // Son adımda: API'ye gönder
                 try {
-                  // await api.register({ ...values, category, devExtra, investorExtra })
-                  // window.location.href = "/";
+                  const response = await authService.register({
+                    ...values,
+                    category,
+                    ...(category === 'developer' && devExtra ? { devExtra } : {}),
+                    ...(category === 'investor' && investorExtra ? { investorExtra } : {})
+                  });
+                  
+                  // Token'ı kaydet ve ana sayfaya yönlendir
+                  authService.setToken(response.token);
+                  window.location.href = "/";
                 } catch (err: any) {
-                  helpers.setStatus(err?.message || "Bir hata oluştu");
+                  helpers.setStatus(
+                    err?.response?.data?.message || 
+                    err?.message || 
+                    "Kayıt olurken bir hata oluştu"
+                  );
                 } finally {
                   helpers.setSubmitting(false);
                 }
