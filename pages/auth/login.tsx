@@ -52,12 +52,36 @@ const Login: AuthPageComponent = () => {
             ) => {
               setStatus(undefined);
               try {
-                // API isteği burada yapılacak
-                // örn: await api.login(values)
-                // Başarılı girişte yönlendirme veya state güncellemesi
-                // window.location.href = "/";
+                const response = await fetch(`${process.env.BASE_URL}/api/auth/login`, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    email: values.email,
+                    password: values.password
+                  }),
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) {
+                  throw new Error(data.message || 'Giriş işlemi başarısız');
+                }
+
+                if (data.status === 'ok' && data.jwt) {
+                  // JWT'yi localStorage'a kaydet
+                  localStorage.setItem('token', data.jwt);
+                  // Kullanıcı bilgilerini localStorage'a kaydet
+                  localStorage.setItem('user', JSON.stringify(data.user));
+                  // Ana sayfaya yönlendir
+                  window.location.href = "/";
+                } else {
+                  throw new Error('Geçersiz yanıt formatı');
+                }
+                
               } catch (err: any) {
-                setStatus(err?.message || "Bir hata oluştu");
+                setStatus(err?.message || "Giriş yapılırken bir hata oluştu");
               } finally {
                 setSubmitting(false);
               }
