@@ -98,6 +98,17 @@ export const authService = {
     localStorage.setItem('token', token);
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   },
+
+  async forgotPassword(email: string): Promise<void> {
+    await axios.post(`${API_URL}/auth/forgot-password`, { email });
+  },
+
+  async resetPassword(token: string, newPassword: string): Promise<void> {
+    await axios.post(`${API_URL}/auth/reset-password`, { 
+      token,
+      newPassword
+    });
+  },
   
   getToken(): string | null {
     if (typeof window !== 'undefined') {

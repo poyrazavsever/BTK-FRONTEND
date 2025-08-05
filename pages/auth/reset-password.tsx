@@ -2,6 +2,8 @@ import React from "react";
 import Logo from "@/components/ui/logo";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useRouter } from "next/router";
+import { authService } from "@/services/auth";
 
 interface ResetPasswordFormValues {
   newPassword: string;
@@ -27,6 +29,19 @@ interface AuthPageComponent extends React.FC {
 }
 
 const ResetPassword: AuthPageComponent = () => {
+  const router = useRouter();
+  const { token } = router.query;
+
+  React.useEffect(() => {
+    if (!token && router.isReady) {
+      router.replace('/auth/login');
+    }
+  }, [token, router.isReady]);
+
+  if (!token || !router.isReady) {
+    return null;
+  }
+
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-white">
       {/* Sol: Form alanı */}
@@ -44,10 +59,14 @@ const ResetPassword: AuthPageComponent = () => {
             onSubmit={async (values, { setSubmitting, setStatus }) => {
               setStatus(undefined);
               try {
-                // await api.resetPassword(values)
+                await authService.resetPassword(token as string, values.newPassword);
                 setStatus("Şifre başarıyla güncellendi!");
+                // Başarılı durumda 2 saniye sonra login sayfasına yönlendir
+                setTimeout(() => {
+                  router.push('/auth/login');
+                }, 2000);
               } catch (err: any) {
-                setStatus(err?.message || "Bir hata oluştu");
+                setStatus(err?.response?.data?.message || err?.message || "Şifre güncellenirken bir hata oluştu");
               } finally {
                 setSubmitting(false);
               }

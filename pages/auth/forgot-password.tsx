@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "@/components/ui/logo";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { authService } from "@/services/auth";
 
 interface ForgotPasswordFormValues {
   email: string;
@@ -40,12 +41,12 @@ const ForgotPassword: AuthPageComponent = () => {
             onSubmit={async (values, { setSubmitting, setStatus }) => {
               setStatus(undefined);
               try {
-                // await api.forgotPassword(values.email)
+                await authService.forgotPassword(values.email);
                 setStatus(
                   "E-posta gönderildi! Lütfen gelen kutunu kontrol et."
                 );
               } catch (err: any) {
-                setStatus(err?.message || "Bir hata oluştu");
+                setStatus(err?.response?.data?.message || err?.message || "Şifre sıfırlama e-postası gönderilirken bir hata oluştu");
               } finally {
                 setSubmitting(false);
               }
