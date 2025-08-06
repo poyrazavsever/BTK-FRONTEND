@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Logo from "@/components/ui/logo";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { authApi } from "@/api/auth";
 import { stepSchemas, initialValues } from "@/components/register/steps";
 import CategoryStep, { UserCategory } from "@/components/register/CategoryStep";
 import DevExtraStep from "@/components/register/DevExtraStep";
@@ -100,8 +101,20 @@ const Register: RegisterComponent = () => {
                 }
                 // Son adımda: API'ye gönder
                 try {
-                  // await api.register({ ...values, category, devExtra, investorExtra })
-                  // window.location.href = "/";
+                  const requestData = {
+                    ...values,
+                    category,
+                    ...(category === 'developer' && devExtra.cv && devExtra.idFront ? {
+                      devExtra: {
+                        cv: devExtra.cv,
+                        idFront: devExtra.idFront
+                      }
+                    } : {}),
+                    ...(category === 'investor' ? { investorExtra } : {})
+                  };
+
+                  await authApi.register(requestData);
+                  window.location.href = "/";
                 } catch (err: any) {
                   helpers.setStatus(err?.message || "Bir hata oluştu");
                 } finally {
