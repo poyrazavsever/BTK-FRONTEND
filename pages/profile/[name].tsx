@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
+import { motion } from "framer-motion";
 
 interface Project {
   id: string;
@@ -116,7 +117,13 @@ const ProjectCard: React.FC<Project> = ({
   progress,
 }) => {
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm"
+    >
       <div className="flex items-start justify-between gap-4">
         <div>
           <h3 className="font-semibold text-lg text-gray-900">{name}</h3>
@@ -167,7 +174,7 @@ const ProjectCard: React.FC<Project> = ({
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
@@ -176,11 +183,17 @@ const StatCard: React.FC<{
   label: string;
   value: string | number;
 }> = ({ icon, label, value }) => (
-  <div className="bg-white rounded-lg border border-gray-200 p-4 text-center">
+  <motion.div 
+    initial={{ opacity: 0, scale: 0.9 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.4 }}
+    className="bg-white rounded-lg border border-gray-200 p-4 text-center"
+  >
     <Icon icon={icon} className="text-primary mx-auto mb-2" width={24} />
     <div className="text-sm text-gray-600">{label}</div>
     <div className="text-xl font-semibold text-gray-900 mt-1">{value}</div>
-  </div>
+  </motion.div>
 );
 
 const ProfilePage: React.FC = () => {
@@ -192,9 +205,20 @@ const ProfilePage: React.FC = () => {
   const profile = mockProfile.type === "investor" ? mockInvestorProfile : mockProfile;
 
   return (
-    <div className="max-w-6xl mx-auto py-10 px-4">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="max-w-6xl mx-auto py-10 px-4"
+    >
       {/* Profil Başlığı */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="bg-white rounded-xl border border-gray-200 p-6 mb-8"
+      >
         <div className="flex flex-col md:flex-row items-start gap-6">
           <img
             src={profile.avatar}
@@ -262,7 +286,7 @@ const ProfilePage: React.FC = () => {
             İletişime Geç
           </button>
         </div>
-      </div>
+      </motion.div>
 
       {/* İstatistikler */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -302,25 +326,41 @@ const ProfilePage: React.FC = () => {
 
       {/* Yetenekler veya Uzmanlıklar */}
       {(profile.skills || profile.specializations) && (
-        <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="bg-white rounded-xl border border-gray-200 p-6 mb-8"
+        >
           <h2 className="text-lg font-semibold text-gray-900 mb-4">
             {profile.type === "developer" ? "Yetenekler" : "Uzmanlık Alanları"}
           </h2>
           <div className="flex flex-wrap gap-2">
             {(profile.skills || profile.specializations)?.map((item) => (
-              <span
+              <motion.span
                 key={item}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3 }}
                 className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
               >
                 {item}
-              </span>
+              </motion.span>
             ))}
           </div>
-        </div>
+        </motion.div>
       )}
 
       {/* Projeler / Yatırımlar Sekmesi */}
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        className="bg-white rounded-xl border border-gray-200 overflow-hidden"
+      >
         <div className="flex border-b border-gray-200">
           <button
             className={`flex-1 px-4 py-3 text-sm font-medium ${
@@ -351,14 +391,22 @@ const ProfilePage: React.FC = () => {
               ? (profile.type === "investor"
                   ? profile.investments
                   : profile.projects
-                )?.map((project) => (
-                  <ProjectCard key={project.id} {...project} />
+                )?.map((project, index) => (
+                  <motion.div
+                    key={project.id}
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.5 + (index * 0.1) }}
+                  >
+                    <ProjectCard {...project} />
+                  </motion.div>
                 ))
               : null}
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
