@@ -1,5 +1,6 @@
 import React from "react";
 import { Icon } from "@iconify/react";
+import { motion } from "framer-motion";
 
 interface NotificationProps {
   type: "application" | "task" | "auth" | "friend";
@@ -88,17 +89,28 @@ const NotificationCard: React.FC<NotificationProps> = ({
   const style = getNotificationStyle();
 
   return (
-    <div
+    <motion.div
       className={`flex items-start gap-4 p-4 rounded-lg border ${
         style.bg
       } ${style.border} ${!read && "ring-2 ring-primary/20"}`}
+      initial={{ opacity: 0, x: -30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
     >
-      <div
+      <motion.div
         className={`${style.color} bg-white p-2 rounded-full border ${style.border}`}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.3, delay: 0.2 }}
       >
         <Icon icon={style.icon} width={24} height={24} />
-      </div>
-      <div className="flex-1 min-w-0">
+      </motion.div>
+      <motion.div 
+        className="flex-1 min-w-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3, delay: 0.3 }}>
         <div className="flex items-center justify-between gap-2 mb-1">
           <h3 className={`font-semibold ${style.color}`}>{title}</h3>
           <span className="text-sm text-gray-500 whitespace-nowrap">
@@ -115,26 +127,57 @@ const NotificationCard: React.FC<NotificationProps> = ({
             <Icon icon="mdi:arrow-right" className="ml-1" />
           </a>
         )}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
 const Notifications: React.FC = () => {
   return (
-    <div className="max-w-6xl mx-auto py-10 px-4">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Bildirimler</h1>
-        <button className="text-sm text-primary font-medium hover:opacity-80">
+    <motion.div 
+      className="max-w-6xl mx-auto py-10 px-4"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div 
+        className="flex items-center justify-between mb-6"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <motion.h1 
+          className="text-2xl font-bold text-gray-900"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          Bildirimler
+        </motion.h1>
+        <motion.button 
+          className="text-sm text-primary font-medium hover:opacity-80"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3, delay: 0.4 }}
+        >
           Tümünü Okundu İşaretle
-        </button>
-      </div>
-      <div className="space-y-4">
+        </motion.button>
+      </motion.div>
+      <motion.div 
+        className="space-y-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
         {mockNotifications.map((notification, index) => (
-          <NotificationCard key={index} {...notification} />
+          <NotificationCard 
+            key={index} 
+            {...notification}
+          />
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
