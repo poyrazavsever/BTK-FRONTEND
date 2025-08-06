@@ -27,10 +27,10 @@ const HeroSection = () => {
           Gelişiyor, seni hedeflerine ulaştırmak için tasarlandı.
         </p>
         <div className="flex flex-col md:flex-row gap-4 mt-4">
-          <Button variant="link" className="min-w-[220px]">
+          <Button href="/ideas/create" variant="secondary" className="min-w-[220px]">
             Fikrini Gerçekleştir
           </Button>
-          <Button variant="primary" className="min-w-[220px]">
+          <Button href="/auth/register" variant="primary" className="min-w-[220px]">
             Geliştirici Olarak Devam Et
           </Button>
         </div>
