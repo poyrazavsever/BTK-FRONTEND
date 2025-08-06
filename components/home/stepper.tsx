@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const steps = [
   {
@@ -18,17 +19,38 @@ const steps = [
 const Stepper = () => {
   return (
     <section className="w-full min-h-[90vh] max-w-5xl mx-auto py-16 flex flex-col items-center justify-center">
-      <h2 className="text-header text-2xl md:text-3xl font-bold text-center mb-4">
+      <motion.h2
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="text-header text-2xl md:text-3xl font-bold text-center mb-4"
+      >
         Geliştirmenin 3 Temel Adımı
-      </h2>
-      <p className="text-text text-center text-base md:text-lg mb-10 max-w-xl">
+      </motion.h2>
+      <motion.p
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+        className="text-text text-center text-base md:text-lg mb-10 max-w-xl"
+      >
         Hayal gücünü somut çözümlere dönüştürmenin yolu sistematik bir süreçten
-        geçer. <span className="text-primary font-semibold font-nunito">Gelişiyor</span>,
-        seni bu yolculukta adım adım destekler.
-      </p>
+        geçer.{" "}
+        <span className="text-primary font-semibold font-nunito">
+          Gelişiyor
+        </span>
+        , seni bu yolculukta adım adım destekler.
+      </motion.p>
       <div className="flex flex-col md:flex-row items-center gap-10 w-full justify-center">
         {/* Sol: Davet Kartı ve görsel */}
-        <div className="relative flex-shrink-0">
+        <motion.div
+          className="relative flex-shrink-0"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+        >
           <div className="rounded-xl overflow-hidden shadow-lg bg-white">
             <img
               src="/images/defaultAvatar.png"
@@ -44,11 +66,22 @@ const Stepper = () => {
             </span>
           </div>
           <div className="absolute inset-0 rounded-xl bg-primary/10 pointer-events-none" />
-        </div>
+        </motion.div>
         {/* Sağ: Adımlar */}
         <div className="flex flex-col gap-8">
           {steps.map((step, idx) => (
-            <div key={step.title} className="flex items-start gap-4">
+            <motion.div
+              key={step.title}
+              className="flex items-start gap-4"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.6,
+                delay: 0.6 + idx * 0.2,
+                ease: "easeOut",
+              }}
+            >
               <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg shadow">
                 {idx + 1}
               </div>
@@ -60,7 +93,7 @@ const Stepper = () => {
                   {step.desc}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
