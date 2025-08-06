@@ -1,11 +1,16 @@
 import React from "react";
 import Button from "@/components/ui/button";
 import { Icon } from "@iconify/react";
+import { motion } from "framer-motion";
 
 const HeroSection = () => {
   return (
     <section className="w-full min-h-[70vh] max-w-lg container mx-auto py-16 flex flex-col items-center justify-center bg-white">
-      <div className="flex flex-col items-center gap-6">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="flex flex-col items-center gap-6">
         <h1 className="text-header font-bold text-center text-3xl sm:text-4xl md:text-5xl flex flex-col items-center gap-2">
           <span className="flex items-center gap-3">
             Üret,
@@ -34,7 +39,7 @@ const HeroSection = () => {
             Geliştirici Olarak Devam Et
           </Button>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
