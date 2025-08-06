@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import DeveloperCard, {
   DeveloperCardProps,
 } from "@/components/shared/developerCard";
+import { motion } from "framer-motion";
 
 const mockDevelopers: DeveloperCardProps[] = [
   {
@@ -57,9 +58,24 @@ const Developers: React.FC = () => {
   }, [search, skill]);
 
   return (
-    <div className="max-w-6xl mx-auto py-10">
-      <div className="flex flex-col md:flex-row md:items-end gap-4 mb-8">
-        <div className="flex-1">
+    <motion.div 
+      className="max-w-6xl mx-auto py-10"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div 
+        className="flex flex-col md:flex-row md:items-end gap-4 mb-8"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <motion.div 
+          className="flex-1"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
           <label className="block text-sm font-medium text-text mb-1">
             Arama
           </label>
@@ -70,7 +86,7 @@ const Developers: React.FC = () => {
             placeholder="İsim, unvan veya biyografi ara..."
             className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/30 text-base"
           />
-        </div>
+        </motion.div>
         <div>
           <label className="block text-sm font-medium text-text mb-1">
             Yetenek
@@ -88,23 +104,41 @@ const Developers: React.FC = () => {
             ))}
           </select>
         </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      </motion.div>
+      <motion.div 
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
         {filteredDevelopers.length === 0 ? (
-          <div className="text-center text-gray-400 py-12">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="text-center text-gray-400 py-12"
+          >
             Hiç geliştirici bulunamadı.
-          </div>
+          </motion.div>
         ) : (
           filteredDevelopers.map((developer, i) => (
-            <DeveloperCard
+            <motion.div
               key={i}
-              {...developer}
-              onConnect={() => alert("İletişime geç: " + developer.name)}
-            />
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 + (i * 0.1) }}
+            >
+              <DeveloperCard
+                {...developer}
+                onConnect={() => alert("İletişime geç: " + developer.name)}
+              />
+            </motion.div>
           ))
         )}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
