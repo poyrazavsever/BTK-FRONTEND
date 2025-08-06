@@ -1,5 +1,6 @@
 import React from "react";
 import { Icon } from "@iconify/react";
+import { motion } from "framer-motion";
 
 const features = [
   {
@@ -32,21 +33,45 @@ const Why = () => {
   return (
     <section className="w-full bg-primary/10 my-16 py-16 flex flex-col items-center justify-center">
       <div className="max-w-4xl w-full mx-auto px-4">
-        <div className="text-center mb-2 text-primary font-semibold tracking-wide uppercase text-sm">
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-2 text-primary font-semibold tracking-wide uppercase text-sm"
+        >
           NEDEN
-        </div>
-        <h2 className="text-header text-2xl md:text-3xl font-bold text-center mb-4 max-w-lg mx-auto">
+        </motion.div>
+        <motion.h2 
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-header text-2xl md:text-3xl font-bold text-center mb-4 max-w-lg mx-auto"
+        >
           Neden Enerjini Burayla Paylaşmalısın?
-        </h2>
-        <p className="text-text text-center text-base md:text-lg mb-10 max-w-2xl mx-auto">
+        </motion.h2>
+        <motion.p 
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="text-text text-center text-base md:text-lg mb-10 max-w-2xl mx-auto">
           Hayal gücünü somut çözümlere dönüştürmenin yolu sistematik bir
           süreçten geçer.{" "}
           <span className="text-primary font-bold font-nunito">Gelişiyor</span>, seni bu
           yolculukta adım adım destekler.
-        </p>
+        </motion.p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-          {features.map((feature) => (
-            <div key={feature.title} className="flex items-start gap-4">
+          {features.map((feature, index) => (
+            <motion.div 
+              key={feature.title} 
+              className="flex items-start gap-4"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.6 + index * 0.2 }}
+            >
               <div
                 className={`w-16 h-16 rounded-xl flex items-center justify-center text-3xl ${feature.bg}`}
               >
@@ -60,7 +85,7 @@ const Why = () => {
                   {feature.desc}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
