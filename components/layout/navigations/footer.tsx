@@ -33,9 +33,9 @@ const sections = [
   {
     title: "Legal",
     links: [
-      { label: "Gizlilik Politikası", href: "/privacy-policy" },
-      { label: "Şartlar & Koşullar", href: "/terms" },
-      { label: "Çerez Politikası", href: "/cookie-policy" },
+      { label: "Gizlilik Politikası", href: "/legal/privacy-policy" },
+      { label: "Şartlar & Koşullar", href: "/legal/terms" },
+      { label: "Çerez Politikası", href: "/legal/cookie-policy" },
     ],
   },
 ];
