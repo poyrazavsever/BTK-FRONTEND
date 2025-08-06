@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import IdeaCard from "@/components/shared/ideaCard";
+import { motion } from "framer-motion";
 
 const mockIdeas = [
   {
@@ -84,8 +85,19 @@ const Ideas: React.FC = () => {
   }, [search, category, sort]);
 
   return (
-    <div className="max-w-6xl mx-auto py-10">
-      <div className="flex flex-col md:flex-row md:items-end gap-4 mb-8">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="max-w-6xl mx-auto py-10"
+    >
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="flex flex-col md:flex-row md:items-end gap-4 mb-8"
+      >
         <div className="flex-1">
           <label className="block text-sm font-medium text-text mb-1">
             Arama
@@ -131,22 +143,38 @@ const Ideas: React.FC = () => {
             ))}
           </select>
         </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      </motion.div>
+      <motion.div 
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
         {filteredIdeas.length === 0 ? (
-          <div className="text-center text-gray-400 py-12">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="text-center text-gray-400 py-12"
+          >
             Hiç fikir bulunamadı.
-          </div>
+          </motion.div>
         ) : (
-          filteredIdeas.map((idea) => (
-            <IdeaCard
+          filteredIdeas.map((idea, index) => (
+            <motion.div
               key={idea.id}
-              {...idea}
-            />
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 + (index * 0.1) }}
+            >
+              <IdeaCard {...idea} />
+            </motion.div>
           ))
         )}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
