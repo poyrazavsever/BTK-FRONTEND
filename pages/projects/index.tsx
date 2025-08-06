@@ -21,6 +21,7 @@ const mockProjects: ProjectCardProps[] = [
       "/images/defaultAvatar.png",
       "/images/defaultAvatar.png",
     ],
+    isInvestable: true,
   },
   {
     title: "Yapay Zeka ile Kişisel Finans Yönetimi",
