@@ -10,6 +10,8 @@ export interface ProjectCardProps {
   likes: number;
   participants: number;
   avatars: string[]; // up to 3 shown, rest as +N
+  isInvestable?: boolean;
+  projectId?: string;
   onDetail?: () => void;
 }
 
@@ -21,6 +23,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   likes,
   participants,
   avatars,
+  isInvestable = false,
+  projectId = "1",
 }) => {
   const maxAvatars = 3;
   const shownAvatars = avatars.slice(0, maxAvatars);
@@ -48,7 +52,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <>
-      <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-xs max-w-xl">
+      <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-xs max-w-xl relative">
+        {isInvestable && (
+          <div className="absolute top-4 right-4 flex items-center gap-2 text-green-600 bg-green-50 px-3 py-1.5 rounded-full border border-green-200">
+            <Icon
+              icon="hugeicons:tick-double-04"
+              width={18}
+              height={18}
+            />
+            <span className="text-xs font-medium">Yatırıma Açık</span>
+          </div>
+        )}
         <div className="flex items-center gap-1 mb-2">
           {shownAvatars.map((src, i) => (
             <img
@@ -100,12 +114,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
         </div>
         <div className="flex items-center justify-between gap-4">
-          <Button variant="secondary" className="w-full" onClick={handleApply}>
-            Başvur
-          </Button>
-          <Button href="/ideas/1" variant="primary" className="w-full">
-            Detaylar
-          </Button>
+          {isInvestable ? (
+            <>
+              <Button variant="secondary" className="w-full" onClick={handleApply}>
+                Başvur
+              </Button>
+              <Button href={`/projects/${projectId}/invest`} variant="primary" className="w-full">
+                Yatırım Yap
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="secondary" className="w-full" onClick={handleApply}>
+                Başvur
+              </Button>
+              <Button href={`/projects/${projectId}`} variant="primary" className="w-full">
+                Detaylar
+              </Button>
+            </>
+          )}
         </div>
       </div>
 
