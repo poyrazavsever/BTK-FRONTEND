@@ -21,7 +21,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   likes,
   participants,
   avatars,
-  onDetail,
 }) => {
   const maxAvatars = 3;
   const shownAvatars = avatars.slice(0, maxAvatars);
@@ -104,7 +103,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <Button variant="secondary" className="w-full" onClick={handleApply}>
             Başvur
           </Button>
-          <Button variant="primary" className="w-full" onClick={onDetail}>
+          <Button href="/ideas/1" variant="primary" className="w-full">
             Detaylar
           </Button>
         </div>
