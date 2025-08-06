@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import InvestorCard, {
   InvestorCardProps,
 } from "@/components/shared/investorCard";
+import { motion } from "framer-motion";
 
 const mockInvestors: InvestorCardProps[] = [
   {
@@ -57,8 +58,19 @@ const Investors: React.FC = () => {
   }, [search, tag]);
 
   return (
-    <div className="max-w-6xl mx-auto py-10">
-      <div className="flex flex-col md:flex-row md:items-end gap-4 mb-8">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="max-w-6xl mx-auto py-10"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="flex flex-col md:flex-row md:items-end gap-4 mb-8"
+      >
         <div className="flex-1">
           <label className="block text-sm font-medium text-text mb-1">
             Arama
@@ -88,23 +100,41 @@ const Investors: React.FC = () => {
             ))}
           </select>
         </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      </motion.div>
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
         {filteredInvestors.length === 0 ? (
-          <div className="text-center text-gray-400 py-12">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="text-center text-gray-400 py-12"
+          >
             Hiç yatırımcı bulunamadı.
-          </div>
+          </motion.div>
         ) : (
           filteredInvestors.map((investor, i) => (
-            <InvestorCard
+            <motion.div
               key={i}
-              {...investor}
-              onMessage={() => alert("Mesaj gönder: " + investor.name)}
-            />
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
+            >
+              <InvestorCard
+                {...investor}
+                onMessage={() => alert("Mesaj gönder: " + investor.name)}
+              />
+            </motion.div>
           ))
         )}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
