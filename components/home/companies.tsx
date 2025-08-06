@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const companies = [
   { name: "OMEDYA", img: "/companies/image 1.png" },
@@ -23,15 +24,25 @@ const Companies = () => {
         Bize Güvenen Yatırımcılarımız
       </h2>
       <div className="flex flex-wrap justify-center items-center gap-10 w-full max-w-6xl mx-auto">
-        {companies.map((company) => (
-          <div key={company.name} className="flex flex-col items-center z-50">
+        {companies.map((company, index) => (
+          <motion.div
+            key={company.name}
+            className="flex flex-col items-center z-50"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.5,
+              delay: index * 0.2,
+              ease: "easeOut",
+            }}
+          >
             <img
               src={company.img}
               alt={company.name}
               className="h-4 md:h-12 object-contain grayscale-100 opacity-80 mb-2"
               loading="lazy"
             />
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>
