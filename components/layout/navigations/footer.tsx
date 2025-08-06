@@ -55,8 +55,9 @@ const Footer = () => {
         <div className="flex-1 min-w-[220px] flex flex-col gap-4">
           <Logo variant="withText" />
           <p className="text-gray-500 text-sm max-w-xs mt-2">
-            Gelişiyor is a platform focused on bringing together developers and
-            investors who want to generate ideas and collaborate.
+            Gelişiyor, girişimciler, geliştiriciler ve yatırımcılar için
+            fikirlerin hayata geçmesini kolaylaştıran modern bir platformdur.
+            Fikrini paylaş, ekibini kur, yatırım al ve büyüt!
           </p>
           <div className="flex gap-3 mt-2">
             {socialIcons.map((s) => (
