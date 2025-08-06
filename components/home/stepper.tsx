@@ -17,7 +17,7 @@ const steps = [
 
 const Stepper = () => {
   return (
-    <section className="w-full max-w-5xl mx-auto py-16 flex flex-col items-center justify-center">
+    <section className="w-full min-h-[90vh] max-w-5xl mx-auto py-16 flex flex-col items-center justify-center">
       <h2 className="text-header text-2xl md:text-3xl font-bold text-center mb-4">
         Geliştirmenin 3 Temel Adımı
       </h2>
